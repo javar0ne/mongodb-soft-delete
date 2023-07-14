@@ -47,13 +47,15 @@ public class CustomMongoTemplate extends MongoTemplate {
     public <T> T findById(Object id, Class<T> entityClass, String collectionName) {
         T t = super.findById(id, entityClass, collectionName);
 
-        try {
-            Field field = SoftDelete.class.getDeclaredField(DELETED_AT_KEY);
-            field.setAccessible(Boolean.TRUE);
-            if (Objects.nonNull(field.get(t))) {
-                return null;
+        if(t instanceof SoftDelete) {
+            try {
+                Field field = SoftDelete.class.getDeclaredField(DELETED_AT_KEY);
+                field.setAccessible(Boolean.TRUE);
+                if (Objects.nonNull(field.get(t))) {
+                    return null;
+                }
+            } catch (NoSuchFieldException | IllegalAccessException ignored) {
             }
-        } catch (NoSuchFieldException | IllegalAccessException ignored) {
         }
 
         return t;
