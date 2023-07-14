@@ -7,7 +7,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(callSuper = true)
 
 @Document(collection = "examples")
 public class Example extends SoftDelete {
