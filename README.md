@@ -78,6 +78,16 @@ public class ExampleService {
     }
 }
 ```
+6. Finally add in your main class the annotation _@EnableMongoRepositories_ this way:
+```java
+@SpringBootApplication
+@EnableMongoRepositories(repositoryFactoryBeanClass = SoftDeleteMongoRepositoryFactoryBean.class)
+public class MongoDbSoftDeleteApplication {
+    public static void main(String[] args) {
+        SpringApplication.run(MongoDbSoftDeleteApplication.class, args);
+    }
+}
+```
 
 ### Acknowledgments
 - The development of the project was inspired by [this](https://stackoverflow.com/a/71811055/21914683) answer on StackOverflow. 
